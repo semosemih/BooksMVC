@@ -16,13 +16,13 @@
 
         public int Id { get; set; } // property
 
-        protected Record()
-        {
-        }
-
         protected Record(int id)
         {
             Id = id;
+        }
+
+        protected Record()
+        {
         }
     }
 }

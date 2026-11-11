@@ -77,7 +77,8 @@ namespace APP.Services
             var entity = DbSingle(id);
             if (entity is null)
                 return Error("Author not found!");
-            if (entity.Books.Any()) // one to many relationship check
+            // Check if the Author entity has relational Book entities.
+            if (entity.Books.Any())
                 return Error("Author has relational books!");
             DbRemove(entity);
             return Success(entity.Id, "Author deleted successfully.");

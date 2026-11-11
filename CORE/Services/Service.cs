@@ -27,9 +27,9 @@ namespace CORE.Services
         }
 
         protected CommandResponse Success(int id, string message = default)
-            => new CommandResponse(true, message, id);
+            => new CommandResponse(true, message ?? "Operation successful.", id);
 
-        protected CommandResponse Error(string message)
-            => new CommandResponse(false, message);
+        protected CommandResponse Error(string message = default)
+            => new CommandResponse(false, message ?? "Operation failed!");
     }
 }

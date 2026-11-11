@@ -71,7 +71,8 @@ namespace APP.Services
             var entity = DbSingle(id);
             if (entity is null)
                 return Error("Genre not found!");
-            DbRemove(entity.BookGenres); // delete relational book genres first (many to many)
+            // Since the delete rule of the Genres and BookGenres relation in the database
+            // is Cascade, the relational BookGenre entities will be deleted automatically.
             DbRemove(entity);
             return Success(entity.Id, "Genre deleted successfully.");
         }

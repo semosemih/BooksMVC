@@ -14,12 +14,13 @@ namespace CORE.Services
         }
 
         protected virtual IQueryable<TEntity> DbQuery()
-        {
-            return _db.Set<TEntity>().AsNoTracking();
-        }
+            => _db.Set<TEntity>().AsNoTracking();
 
         protected TEntity DbSingle(int id)
-            => DbQuery().AsTracking().SingleOrDefault(entity => entity.Id == id);
+        {
+            return DbQuery().AsTracking()
+                .SingleOrDefault(entity => entity.Id == id);
+        }
 
         protected TEntity DbSingle(Expression<Func<TEntity, bool>> predicate) 
             => DbQuery().AsTracking().SingleOrDefault(predicate);

@@ -18,8 +18,6 @@ namespace APP.Models
 
         public int AuthorId { get; set; }
 
-        public List<int> GenreIds { get; set; }
-
         [DisplayName("Publish Date")]
         public string PublishDateR { get; set; }
 

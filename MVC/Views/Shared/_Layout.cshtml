@@ -1,31 +1,44 @@
-﻿<!DOCTYPE html>
+﻿@inject IConfiguration configuration
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MVC</title>
+    @* @ViewData["Title"] is set in views to show the title string values. *@
+    <title>@ViewData["Title"] - @configuration["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
+        @* Bootstrap Navbar: top menu *@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            @*
+            Bootstrap container-fluid class is used for a responsive full-width
+            (without any padding from left and right) div.
+            Bootstrap container class is used for a responsive fixed-width
+            (with some padding from left and right) div.
+            *@
             <div class="container-fluid">
-                @* HTML:
-                <a href="/Home/Index" class="navbar-brand">Users</a>
+                @*
+                Tag Helper: Tag Helpers enable server-side code to participate
+                in creating and rendering HTML elements in Razor views.
+                They look like standard HTML tags but add special attributes
+                such as asp-controller, asp-action, asp-area, asp-route, asp-for,
+                etc. that are processed on the server to generate
+                dynamic content.
+                Will create the HTML link:
+                <a href="/Home/Index" class="navbar-brand">Books MVC</a>
                 *@
-                @* HTML Helper: 
-                @Html.ActionLink("Users", "Index", "Home", new { @class = "navbar-brand"})
-                *@
-                @* Tag Helper: *@ 
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Books MVC</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@configuration["Title"]</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @* Application Links: *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
                         </li>
@@ -40,20 +53,39 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    @*
+        class changed from container to container-fluid to use
+        full-width for the views.
+    *@
+    <div class="container-fluid">
         <main role="main" class="pb-3">
+            @*
+                Renders the views' content returned by
+                controllers' actions.
+            *@
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - Books - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        @*
+            class changed from container to container-fluid to use
+            full-width for the footer.
+        *@
+        <div class="container-fluid">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @*
+        Renders the optional Scripts section in the views which contains
+        extra Javascript or jQuery codes, generally for using third-party
+        Javascript-CSS client side libraries.
+        Since the required parameter is false, there must not be a Scripts
+        section in every view.
+    *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

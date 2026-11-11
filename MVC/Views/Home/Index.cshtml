@@ -1,8 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@inject IConfiguration configuration
+@{
+    /*
+    ViewData and ViewBag are the same collection (dictionary).
+    They carry extra data other than the model object from a
+    controller action to its view, or between views.
+    The value assigned will be shown in
+    Views/Shared/_Layout.cshtml view's title tag
+    of the head tag.
+    */
+    // Way 1:
+    // ViewData["Title"] = "Home Page";
+    // Way 2:
+    ViewBag.Title = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Books MVC project. Use the <a asp-controller="Db" asp-action="Seed">Db/Seed</a> link to fill the database with sample data.</p>
+    <h1 class="display-4">Welcome to @configuration["Title"]</h1>
 </div>
+
+<p class="text-center">
+    Version: @configuration["App:Version"]
+    <br />
+    Date: @configuration["App:Date"]
+</p>

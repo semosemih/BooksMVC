@@ -33,7 +33,6 @@ namespace APP.Services
                 Price = b.Price,
                 IsTopSeller = b.IsTopSeller,
                 AuthorId = b.AuthorId,
-                GenreIds = b.GenreIds,
 
                 PublishDateR = b.PublishDate.ToShortDateString(),
                 PriceR = b.Price.ToString("C2"),
@@ -87,6 +86,8 @@ namespace APP.Services
             var entity = DbSingle(request.Id);
             if (entity is null)
                 return Error("Book not found!");
+            if (request.GenreIds is not null)
+                DbRemove(entity.BookGenres); // delete existing book genres first (many to many)
             entity.Name = request.Name.Trim();
             entity.NumberOfPages = request.NumberOfPages;
             entity.IsTopSeller = request.IsTopSeller;
@@ -97,10 +98,7 @@ namespace APP.Services
             if (request.AuthorId.HasValue)
                 entity.AuthorId = request.AuthorId.Value;
             if (request.GenreIds is not null)
-            {
-                DbRemove(entity.BookGenres); // delete existing book genres first (many to many)
                 entity.GenreIds = request.GenreIds;
-            }
             DbUpdate(entity);
             return Success(entity.Id, "Book updated successfully.");
         }
