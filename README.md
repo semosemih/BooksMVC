@@ -25,10 +25,10 @@ Then open `/Db/Seed` once to insert sample data.
 
 ## Phases
 
-- Phase 1: CRUD operations for all entities ✅
-- Final phase: Cookie authentication, authorization (Admin role), session
+- Phase 1: CRUD operations for all entities 
 
 ## Team
 
 - Mevlüt Yılmaz
 - Semih Şengül
+- Dilara Öztürk
