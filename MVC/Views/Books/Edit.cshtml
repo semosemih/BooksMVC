@@ -103,6 +103,13 @@
     </form>
 </div>
 }
+else
+{
+<div class="@containerDivClass">
+    <p class="text-danger">Book not found!</p>
+    <a asp-action="Index">Back to List</a>
+</div>
+}
 
 @section Scripts {
     @* Can be uncommented to use client-side validation using jQuery instead of server-side validation. *@
