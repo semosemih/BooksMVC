@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 # Rider
 .idea/
+
+# SQLite temporary files (write-ahead log / shared memory)
+*.db-shm
+*.db-wal
